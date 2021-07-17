@@ -1,7 +1,6 @@
-# import pyautogui
+import webbrowser, os
 
-# myScreenshot = pyautogui.screenshot()
-# myScreenshot.save(r'C:\Users\user pc\Desktop\screenshotpy\screenshot.png')
+
 
 import datetime
 import pyautogui
@@ -19,7 +18,7 @@ from tkinter import *
 from tkinter import messagebox
 
 tkWindow = Tk()  
-tkWindow.geometry('120x30')  
+tkWindow.geometry('140x30')  
 tkWindow.geometry('+50+980')
 
 
@@ -40,6 +39,7 @@ button = Button(tkWindow,
     fg='dark blue',
 )  
 
+
 tkWindow.attributes('-topmost',True)
 
 tkWindow.overrideredirect(True)# for removing title bar
@@ -53,9 +53,20 @@ font=50,
     activebackground="red",
     bg="light blue",
     fg='dark blue',)
+    
+def openfolder():
+    path="C:/Users/user pc/Desktop/screenshotpy"
+    webbrowser.open(os.path.realpath(path))
+
+folder_button =Button(tkWindow,text='/',command=openfolder,
+font=50,    
+    activebackground="red",
+    bg="light blue",
+    fg='dark blue',)
 
 button.grid(row=0, column=0)
-exit_button.grid(row=0, column=1)
-
+folder_button.grid(row=0, column=1)
+exit_button.grid(row=0, column=2)
 
 tkWindow.mainloop()
+
