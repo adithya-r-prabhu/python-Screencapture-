@@ -16,7 +16,7 @@ from tkinter import *
 from tkinter import messagebox
 
 tkWindow = Tk()  
-tkWindow.geometry('140x60')  
+tkWindow.geometry('164x60')  
 tkWindow.geometry('+50+980')
 
 
@@ -62,27 +62,24 @@ font=50,
     bg="light blue",
     fg='dark blue',)
 
+#telegram
 def opentelegram():
     path="D:/Telegram/Telegram.exe"
     webbrowser.open(os.path.realpath(path))
-
 telegram = PhotoImage(file='icons/telegram.png')
-
 telegram_button=Button(tkWindow,
 text="TELEGRAM",
 image=telegram,compound=LEFT,
 command=opentelegram,
-
     activebackground="red",
     bg="light green",
     fg='dark blue',)
-    
+
+#whattsapp  
 def openwhattsapp():
     path="C:/Users/user pc/AppData/Local/WhatsApp/WhatsApp.exe"
     webbrowser.open(os.path.realpath(path))
-
 whattsapp = PhotoImage(file='icons/whattsapp.png')
-
 whattsapp_button=Button(tkWindow,
 text="",
 image=whattsapp,
@@ -92,12 +89,11 @@ font=50,
     bg="light green",
     fg='dark blue',)
 
+#edge
 def openedge():
     path="C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe"
     webbrowser.open(os.path.realpath(path))
-
 edge = PhotoImage(file='icons/edge.png')
-
 edge_button=Button(tkWindow,
 text="",
 image=edge,
@@ -107,10 +103,43 @@ font=50,
     bg="light green",
     fg='dark blue',)
 
+#minimizing
+
+def minimizing():
+    tkWindow.overrideredirect(False)
+    tkWindow.wm_state('iconic')
+    tkWindow.iconify()
+
+
+
+
+minimizing_button=Button(tkWindow,
+text="⇲",
+font=60,
+command=minimizing,
+    activebackground="red",
+    bg="light blue",
+    fg='dark blue',)
+
+
+def removetitlebar():
+    tkWindow.overrideredirect(True)
+
+
+removetitlebar_button=Button(tkWindow,
+text="▭",
+font=60,
+command=removetitlebar,
+    activebackground="red",
+    bg="light blue",
+    fg='dark blue',)
+
 button.grid(row=0, column=0)
 folder_button.grid(row=0, column=1)
-exit_button.grid(row=0, column=2)
+minimizing_button.grid(row=0,column=2)
+exit_button.grid(row=0, column=3)
 telegram_button.grid(row=1,column=0)
 whattsapp_button.grid(row=1,column=1)
 edge_button.grid(row=1,column=2)
+removetitlebar_button.grid(row=1,column=3)
 tkWindow.mainloop()
