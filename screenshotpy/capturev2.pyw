@@ -12,6 +12,7 @@ def getTime():
 
 # getTime()
 
+
 from tkinter import *
 from tkinter import messagebox
 
@@ -121,9 +122,25 @@ command=minimizing,
     bg="light blue",
     fg='dark blue',)
 
+n=True
+
+
 
 def removetitlebar():
-    tkWindow.overrideredirect(True)
+    global n
+    
+    if n:
+        tkWindow.overrideredirect(False)
+        tkWindow.geometry('200x60')  
+        n=False
+    else: 
+        tkWindow.overrideredirect(True)
+        tkWindow.geometry('164x60')  
+        n=True
+
+
+
+    
 
 
 removetitlebar_button=Button(tkWindow,
