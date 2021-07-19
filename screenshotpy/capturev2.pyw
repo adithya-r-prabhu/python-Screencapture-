@@ -4,14 +4,10 @@ import datetime
 import pyautogui
 import time
 
-def getTime():
-    #GET THE CURRENT DATE AND TIME
-    now = datetime.datetime.now()
-    now_str = time.strftime("%H.%M.%S")
-    outFile = pyautogui.screenshot('ImageFile{}.PNG'.format(now_str))
+from PIL import ImageTk,Image
 
-# getTime()
-
+import glob
+import os.path
 
 from tkinter import *
 
@@ -19,7 +15,7 @@ from tkinter import *
 
 
 tkWindow = Tk()  
-tkWindow.geometry('164x60')  
+tkWindow.geometry('200x60')  
 tkWindow.geometry('+50+980')
 
 
@@ -29,14 +25,42 @@ tkWindow.title('capyture')
 tkWindow.iconbitmap("icons/Untitled design.ico")
 
 
+def screenshot():
+    #GET THE CURRENT DATE AND TIME
+    now = datetime.datetime.now()
+    now_str = time.strftime("%H.%M.%S")
+    outFile = pyautogui.screenshot('ImageFile{}.PNG'.format(now_str))
+
+def imageviewer():
+    folder_path = r'C:/Users/user pc/Desktop/screenshotpy'
+    file_type = '/*PNG'
+    files = glob.glob(folder_path + file_type)
+    max_file = max(files, key=os.path.getctime) #path of latest file saved 
+    path=max_file
+    webbrowser.open(os.path.realpath(path))
+
+preview  = Button(tkWindow,
+	text = 'P ',
+    font=50,
+	command = imageviewer,
+    activebackground="violet",
+    bg="light blue",
+    fg='dark blue',
+)  
+  
 
 
 
 
-button = Button(tkWindow,
+
+
+
+
+
+capture = Button(tkWindow,
 	text = 'CAPTUR▷',
     font=50,
-	command = getTime,
+	command = screenshot,
     activebackground="violet",
     bg="light blue",
     fg='dark blue',
@@ -61,7 +85,7 @@ def openfolder():
     path="C:/Users/user pc/Desktop/screenshotpy"
     webbrowser.open(os.path.realpath(path))
 
-folder_button =Button(tkWindow,text='f:/',command=openfolder,
+folder_button =Button(tkWindow,text='F',command=openfolder,
 font=50,    
     activebackground="red",
     bg="light blue",
@@ -142,7 +166,7 @@ def removetitlebar():
     else: 
         # without title bar 
         tkWindow.overrideredirect(True)
-        tkWindow.geometry('164x60') 
+        tkWindow.geometry('200x60') 
         n=True
 
 
@@ -158,12 +182,14 @@ command=removetitlebar,
     bg="light blue",
     fg='dark blue',)
 
-button.grid(row=0, column=0)
-folder_button.grid(row=0, column=1)
-minimizing_button.grid(row=0,column=2)
-exit_button.grid(row=0, column=3)
+capture.grid(row=0, column=0)
+preview.grid(row=0, column=1)
+folder_button.grid(row=0, column=2)
+minimizing_button.grid(row=0,column=3)
+exit_button.grid(row=0, column=4)
 telegram_button.grid(row=1,column=0)
 whattsapp_button.grid(row=1,column=1)
 edge_button.grid(row=1,column=2)
 removetitlebar_button.grid(row=1,column=3)
+
 tkWindow.mainloop()
