@@ -15,6 +15,8 @@ def getTime():
 
 from tkinter import *
 from tkinter import messagebox
+from PIL import Image, ImageTk
+
 
 tkWindow = Tk()  
 tkWindow.geometry('164x60')  
@@ -23,6 +25,9 @@ tkWindow.geometry('+50+980')
 
 
 tkWindow.title('capyture')
+
+tkWindow.iconbitmap("icons/Untitled design.ico")
+
 
 def showMsg():  
     messagebox.showinfo('Message', 'You clicked the Submit button!')
@@ -130,12 +135,17 @@ def removetitlebar():
     global n
     
     if n:
+        #with titlebar
         tkWindow.overrideredirect(False)
-        tkWindow.geometry('200x60')  
+        tkWindow.geometry('240x60')
+        if tkWindow.geometry=='+50+980': 
+            tkWindow.geometry('+50+950')
+  
         n=False
     else: 
+        # without title bar 
         tkWindow.overrideredirect(True)
-        tkWindow.geometry('164x60')  
+        tkWindow.geometry('164x60') 
         n=True
 
 
