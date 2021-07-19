@@ -11,7 +11,8 @@ import os.path
 
 from tkinter import *
 
-
+import win32gui
+import win32con
 
 
 tkWindow = Tk()  
@@ -24,12 +25,63 @@ tkWindow.title('capyture')
 
 tkWindow.iconbitmap("icons/Untitled design.ico")
 
+# uses win32gui and win32con
+def windowEnumHandler(hwnd, top_windows):
+    top_windows.append((hwnd, win32gui.GetWindowText(hwnd)))
+
+def bringToFront(window_name):
+    top_windows = []
+    win32gui.EnumWindows(windowEnumHandler, top_windows)
+    for i in top_windows:
+        # print(i[1])
+        if window_name.lower() in i[1].lower():
+            # print("found", window_name)
+            win32gui.ShowWindow(i[0], win32con.SW_SHOWNORMAL)
+            win32gui.SetForegroundWindow(i[0])
+            break
+
+n=True
+def removetitlebar():
+    global n
+    
+    if n:
+        #with titlebar
+        tkWindow.overrideredirect(False)
+        tkWindow.geometry('240x60')
+        n=False
+    else: 
+        # without title bar 
+        tkWindow.overrideredirect(True)
+        tkWindow.geometry('200x60') 
+        n=True
+
+
+
+
+def minimizing():
+    removetitlebar()
+    tkWindow.overrideredirect(False)
+    tkWindow.wm_state('iconic')
+    tkWindow.iconify()
+    
 
 def screenshot():
     #GET THE CURRENT DATE AND TIME
     now = datetime.datetime.now()
     now_str = time.strftime("%H.%M.%S")
+    minimizing()
+    time.sleep(0.5)
     outFile = pyautogui.screenshot('ImageFile{}.PNG'.format(now_str))
+    tkWindow.after(0,tkWindow.focus_force)
+    if __name__ == "__main__":
+        winname = "capyture"
+        bringToFront(winname)
+    removetitlebar()
+
+
+
+
+
 
 def imageviewer():
     folder_path = r'C:/Users/user pc/Desktop/screenshotpy'
@@ -38,6 +90,7 @@ def imageviewer():
     max_file = max(files, key=os.path.getctime) #path of latest file saved 
     path=max_file
     webbrowser.open(os.path.realpath(path))
+
 
 preview  = Button(tkWindow,
 	text = 'P ',
@@ -134,10 +187,7 @@ font=50,
 
 #minimizing
 
-def minimizing():
-    tkWindow.overrideredirect(False)
-    tkWindow.wm_state('iconic')
-    tkWindow.iconify()
+
 
 
 
@@ -149,25 +199,6 @@ command=minimizing,
     activebackground="red",
     bg="light blue",
     fg='dark blue',)
-
-n=True
-
-
-
-def removetitlebar():
-    global n
-    
-    if n:
-        #with titlebar
-        tkWindow.overrideredirect(False)
-        tkWindow.geometry('240x60')
-  
-        n=False
-    else: 
-        # without title bar 
-        tkWindow.overrideredirect(True)
-        tkWindow.geometry('200x60') 
-        n=True
 
 
 
