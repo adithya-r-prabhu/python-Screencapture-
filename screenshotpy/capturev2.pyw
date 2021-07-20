@@ -185,13 +185,23 @@ font=50,
     bg="light green",
     fg='dark blue',)
 
+def openvscode():
+    path="D:/Microsoft VS Code/Code.exe"
+    webbrowser.open(os.path.realpath(path))
+vscode = PhotoImage(file='icons/vscode.png')
+vscode_button=Button(tkWindow,
+text="",
+image=vscode,
+command=openvscode,
+font=50,
+    activebackground="red",
+    bg="light green",
+    fg='dark blue',)
+
+
+
+
 #minimizing
-
-
-
-
-
-
 minimizing_button=Button(tkWindow,
 text="⇲",
 font=60,
@@ -221,6 +231,7 @@ exit_button.grid(row=0, column=4)
 telegram_button.grid(row=1,column=0)
 whattsapp_button.grid(row=1,column=1)
 edge_button.grid(row=1,column=2)
-removetitlebar_button.grid(row=1,column=3)
+vscode_button.grid(row=1,column=3)
+removetitlebar_button.grid(row=1,column=4)
 
 tkWindow.mainloop()
