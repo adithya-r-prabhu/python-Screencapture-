@@ -16,7 +16,7 @@ import win32con
 
 
 tkWindow = Tk()  
-tkWindow.geometry('200x60')  
+tkWindow.geometry('195x60')  
 tkWindow.geometry('+50+980')
 
 
@@ -52,7 +52,7 @@ def removetitlebar():
     else: 
         # without title bar 
         tkWindow.overrideredirect(True)
-        tkWindow.geometry('200x60') 
+        tkWindow.geometry('195x60') 
         n=True
 
 
